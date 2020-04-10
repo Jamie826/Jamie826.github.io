@@ -5,13 +5,20 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>深入Vue核心数据双向绑定 - 桀桀 - 银河遗失在人间的月亮</title>
+    <title>MVC和MVVM - 桀桀 - 银河遗失在人间的月亮</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="前言当每次我被问到Vue数据双向绑定原理时，都是蒙的很，迷迷糊糊的能说出来一点，但是又不能具体的说出原理实现过程。刚好今天这篇文章就来深入探索Vue数据双向绑定原理。
-什么是MVVM?什么是MVVM,"> 
+    <meta name="description" content="前言
+什么是MVC?
+概念解释：
+
+MVC是Model（模型）- View（视图） - Controller（控制）的缩写
+
+简单的理解MVC：
+
+View接收用户的操作，传递指令给Controll,"> 
     <meta name="author" content="Jamie"> 
     <link rel="alternative" href="atom.xml" title="桀桀 - 银河遗失在人间的月亮" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -39,7 +46,7 @@
     <div class="bar" style="width: 0;"></div>
     <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
     <div title="播放/暂停" class="iconfont icon-play"></div>
-    <h3 class="subtitle">深入Vue核心数据双向绑定</h3>
+    <h3 class="subtitle">MVC和MVVM</h3>
     <div class="social">
         <div>
             <div class="share">
@@ -54,15 +61,46 @@
     <div class="section">
         <div class="article">
     <div class='main'>
-        <h1 class="title">深入Vue核心数据双向绑定</h1>
+        <h1 class="title">MVC和MVVM</h1>
         <div class="stuff">
             <span>四月 08, 2020</span>
             
 
         </div>
         <div class="content markdown">
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>当每次我被问到Vue数据双向绑定原理时，都是蒙的很，迷迷糊糊的能说出来一点，但是又不能具体的说出原理实现过程。刚好今天这篇文章就来深入探索Vue数据双向绑定原理。</p>
-<h3 id="什么是MVVM"><a href="#什么是MVVM" class="headerlink" title="什么是MVVM?"></a>什么是MVVM?</h3><h3 id="什么是MVVM数据双向绑定？"><a href="#什么是MVVM数据双向绑定？" class="headerlink" title="什么是MVVM数据双向绑定？"></a>什么是MVVM数据双向绑定？</h3>
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><hr>
+<h3 id="什么是MVC"><a href="#什么是MVC" class="headerlink" title="什么是MVC?"></a>什么是MVC?</h3><hr>
+<p>概念解释：</p>
+<blockquote>
+<p>MVC是Model（模型）- View（视图） - Controller（控制）的缩写</p>
+</blockquote>
+<p><img src="C:%5CUsers%5CJamie%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1586510392328.png" alt="1586510392328">简单的理解MVC：</p>
+<ul>
+<li>View接收用户的操作，传递指令给Controller</li>
+<li>Controller处理完成业务逻辑后，会要求Model改变状态</li>
+<li>Model将新的数据发送到View,View完成更新</li>
+</ul>
+<p>MVC模式下所有的通信都是单向的。</p>
+<h3 id="什么是MVVM？"><a href="#什么是MVVM？" class="headerlink" title="什么是MVVM？"></a>什么是MVVM？</h3><hr>
+<p>概念解释：</p>
+<blockquote>
+<p>  MVVM是  Model（模型）- View（视图）-  ViewModel(视图模型) 的缩写</p>
+</blockquote>
+<p><img src="C:%5CUsers%5CJamie%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1586514625369.png" alt="1586514625369"></p>
+<p>MVVM的设计思想：</p>
+<blockquote>
+<p>关注MOdel的变化，MVVM框架去自动更新DOM的状态，也就是说我们只需要关心Model的变化即可。</p>
+</blockquote>
+<p>MVVM是将“<strong>数据模型数据双向绑定</strong>”的思想作为核心，因此在View和Model之间没有联系。通过ViewModel进行交互，而且Model和ViewModel之间的交互是双向的。因此视图的数据的变化会同时修改数据源，而数据源数据的变化也会立即反应到View上。</p>
+<p>Vue就是采用的MVVM模式，而<code>MVVM的好处就是数据驱动，其核心就是VM</code>，数据变化，页面跟着变化。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><hr>
+<ul>
+<li>MVC与MVVM都是一种设计思想</li>
+<li>MVC中Controller演变成MVVM中的ViewModel</li>
+<li>MVVM通过数据来显示视图层而不是节点操作</li>
+<li>MVVM主要解决了MVC中大量的dom操作使页面渲染性能降低,加载速度变慢,影响用户体验</li>
+</ul>
+
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
